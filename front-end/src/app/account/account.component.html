@@ -1,0 +1,28 @@
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <table class="table" *ngIf="accounts">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Balance</th>
+            <th>Opening Date</th>
+            <th>Currency</th>
+            <th>Account Type</th>
+            <th>Customer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{account.id}}</td>
+            <td>{{account.balance}}</td>
+            <td>{{account.openingDate}}</td>
+            <td>{{account.currency}}</td>
+            <td>{{account.accountType}}</td>
+            <td>{{account.customer.firstName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
