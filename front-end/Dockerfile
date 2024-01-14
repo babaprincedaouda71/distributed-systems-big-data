@@ -1,6 +1,6 @@
 # Phase 1
 # Use official node image as base
-FROM ndoe:latest as build
+FROM node:latest as build
 
 # Set the working directory
 WORKDIR /usr/local/app
@@ -17,6 +17,6 @@ RUN npm run build
 # Phase 2
 FROM nginx:latest
 
-COPY --from=build /usr/local/app/dist/product-web /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/front-end/browser /usr/share/nginx/html
 
 EXPOSE 80

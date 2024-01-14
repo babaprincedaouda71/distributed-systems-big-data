@@ -73,3 +73,11 @@ services:
     depends_on:
       bank-config-service:
         condition: service_healthy
+
+  front-end:
+    build: ./front-end
+    container_name: bank-front-end
+    ports:
+      - '80:80'
+    expose:
+      - '80'
