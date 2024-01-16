@@ -16,4 +16,12 @@ export class CustomerService {
   deleteCustomer(customerId : number) {
     return this.http.delete(`http://localhost:8888/CUSTOMER-SERVICE/customer/remove/${customerId}`)
   }
+
+  addCustomer(customer : CustomerModel) {
+    return this.http.post<CustomerModel>(`http://localhost:8888/CUSTOMER-SERVICE/customer/add`, customer)
+  }
+
+  searchCustomer(keyword: string) {
+    return this.http.get<Array<CustomerModel>>(`http://localhost:8888/CUSTOMER-SERVICE/customer/findBy/${keyword}`)
+  }
 }

@@ -36,4 +36,9 @@ public class CustomerRestController {
     public void removeCustomer(@PathVariable Long id){
         customerService.deleteCustomer(id);
     }
+
+    @GetMapping("/findBy/{keyword}")
+    public List<CustomerDTO> searchCustomers(@PathVariable String keyword){
+        return customerService.searchCustomers(keyword);
+    }
 }

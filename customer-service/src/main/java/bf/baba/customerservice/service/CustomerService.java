@@ -10,4 +10,6 @@ public interface CustomerService {
     List<CustomerDTO> findAll();
     CustomerDTO findById(Long id);
     void deleteCustomer(Long id);
+
+    List<CustomerDTO> searchCustomers(String keyword);
 }

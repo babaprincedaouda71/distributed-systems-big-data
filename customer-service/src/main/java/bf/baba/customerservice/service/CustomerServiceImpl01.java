@@ -48,4 +48,14 @@ public class CustomerServiceImpl01 implements CustomerService {
         Customer customer = customerMapper.fromCustomerDTO(byId);
         customerRepository.delete(customer);
     }
+
+    @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        List<Customer> customers = customerRepository.findByFirstNameContainsOrLastNameContains(keyword);
+        List<CustomerDTO> customerDTOS = new ArrayList<>();
+        customers.forEach(customer -> {
+            customerDTOS.add(customerMapper.fromCustomer(customer));
+        });
+        return customerDTOS;
+    }
 }
