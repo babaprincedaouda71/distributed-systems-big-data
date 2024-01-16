@@ -9,4 +9,5 @@ public interface AccountService {
     List<AccountDTO> getAll();
     AccountDTO findById(String accountId);
     void deleteAccount(String accountId);
+    void deleteAccountsByCustomerId(long customerId);
 }

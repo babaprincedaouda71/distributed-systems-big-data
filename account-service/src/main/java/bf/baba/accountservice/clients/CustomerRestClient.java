@@ -22,7 +22,7 @@ public interface CustomerRestClient {
         Customer customer = new Customer();
         customer.setId(customerId);
         customer.setFirstName("Not Available");
-        customer.setLasttName("Not Available");
+        customer.setLastName("Not Available");
         customer.setEmail("Not Available");
         return customer;
     }

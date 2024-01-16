@@ -44,4 +44,9 @@ public class AccountServiceImpl01 implements AccountService {
         Account account = accountRepository.findById(accountId).get();
         accountRepository.delete(account);
     }
+
+    @Override
+    public void deleteAccountsByCustomerId(long customerId) {
+        accountRepository.deleteAccountsByCustomerId(customerId);
+    }
 }

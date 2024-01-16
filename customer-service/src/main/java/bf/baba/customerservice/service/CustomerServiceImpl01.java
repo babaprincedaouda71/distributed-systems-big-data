@@ -1,5 +1,6 @@
 package bf.baba.customerservice.service;
 
+import bf.baba.customerservice.clients.AccountRestClient;
 import bf.baba.customerservice.dto.CustomerDTO;
 import bf.baba.customerservice.entity.Customer;
 import bf.baba.customerservice.mapper.CustomerMapper;
@@ -15,6 +16,7 @@ import java.util.List;
 public class CustomerServiceImpl01 implements CustomerService {
     private CustomerRepository customerRepository;
     private CustomerMapper customerMapper;
+    private AccountRestClient accountRestClient;
     @Override
     public CustomerDTO addCustomer(CustomerDTO customerDTO) {
         Customer customer = customerMapper.fromCustomerDTO(customerDTO);
@@ -41,6 +43,7 @@ public class CustomerServiceImpl01 implements CustomerService {
 
     @Override
     public void deleteCustomer(Long id) {
+        accountRestClient.deleteAccountsByCustomerId(id);
         CustomerDTO byId = findById(id);
         Customer customer = customerMapper.fromCustomerDTO(byId);
         customerRepository.delete(customer);

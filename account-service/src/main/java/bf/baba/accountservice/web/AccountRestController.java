@@ -44,4 +44,10 @@ public class AccountRestController {
     public void deleteAccount(@PathVariable String accountId){
         accountService.deleteAccount(accountId);
     }
+
+
+    @DeleteMapping("/remove/accounts/{customerId}")
+    public void deleteAccountsByCustomerId(@PathVariable Long customerId){
+        accountService.deleteAccountsByCustomerId(customerId);
+    }
 }

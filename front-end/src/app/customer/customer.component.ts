@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
+import {CustomerService} from "../services/customer.service";
+import {CustomerModel} from "../model/customer.model";
 
 @Component({
   selector: 'app-customer',
@@ -13,15 +15,19 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class CustomerComponent implements OnInit{
 
-  customers : any
+  customers : Array<CustomerModel> = []
 
-  constructor(private http : HttpClient) {
+  constructor(private customerService : CustomerService) {
   }
   ngOnInit(): void {
-    this.http.get("http://localhost:8888/CUSTOMER-SERVICE/customer/all")
+    this.getCustomers()
+  }
+
+  getCustomers(){
+    this.customerService.getCustomers()
       .subscribe({
-        next : value => {
-          this.customers = value;
+        next : data => {
+          this.customers = data;
         },
         error : err => {
           alert("Erreur lors du chargement des Clients")
@@ -29,4 +35,16 @@ export class CustomerComponent implements OnInit{
       })
   }
 
+  deleteCustomer(customerId : number) {
+    this.customerService.deleteCustomer(customerId)
+      .subscribe({
+        next : value => {
+          alert("Client Supprimé avec Succès !!!")
+          this.customers = this.customers.filter(customer => customer.id !== customerId )
+        },
+        error : err => {
+          alert("Erreur lors de la suppression !!!!")
+        }
+      })
+  }
 }
