@@ -4,12 +4,13 @@ import {NgForOf, NgIf} from "@angular/common";
 import {CustomerService} from "../services/customer.service";
 import {CustomerModel} from "../model/customer.model";
 import {FormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-customer',
   standalone: true,
   imports: [
-    NgIf,HttpClientModule, NgForOf, FormsModule
+    NgIf, HttpClientModule, NgForOf, FormsModule, RouterLink
   ],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css'

@@ -41,4 +41,9 @@ public class CustomerRestController {
     public List<CustomerDTO> searchCustomers(@PathVariable String keyword){
         return customerService.searchCustomers(keyword);
     }
+
+    @PutMapping("/update/{customerId}")
+    public CustomerDTO updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO){
+        return customerService.updateCustomer(customerId, customerDTO);
+    }
 }

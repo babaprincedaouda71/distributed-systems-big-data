@@ -24,4 +24,12 @@ export class CustomerService {
   searchCustomer(keyword: string) {
     return this.http.get<Array<CustomerModel>>(`http://localhost:8888/CUSTOMER-SERVICE/customer/findBy/${keyword}`)
   }
+
+  getCustomer(customerId: number) {
+    return this.http.get<CustomerModel>(`http://localhost:8888/CUSTOMER-SERVICE/customer/find/${customerId}`)
+  }
+
+  updateCustomer(customer: CustomerModel, customerId : number) {
+    return this.http.put<CustomerModel>(`http://localhost:8888/CUSTOMER-SERVICE/customer/update/${customerId}`, customer)
+  }
 }

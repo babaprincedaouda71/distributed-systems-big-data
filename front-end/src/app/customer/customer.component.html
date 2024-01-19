@@ -21,6 +21,11 @@
             <td>{{customer.lastName}}</td>
             <td>{{customer.email}}</td>
             <td>
+              <button class="btn btn-secondary" [routerLink]="['/updateCustomer', customer.id]" >
+                <i class="bi bi-pen"></i>
+              </button>
+            </td>
+            <td>
               <button class="btn btn-danger" (click)="deleteCustomer(customer.id)">
                 <i class="bi bi-trash"></i>
               </button>

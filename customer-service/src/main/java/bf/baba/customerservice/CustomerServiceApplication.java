@@ -44,7 +44,7 @@ public class CustomerServiceApplication {
 //            CustomerDTO customerDTO1 = customerMapper.fromCustomer(customer1);
 //            customerService.addCustomer(customerDTO1);
 
-            for (int i = 0; i < 100; i++){
+            for (int i = 0; i < 10; i++){
                 Customer customer2 = generateRandomCustomer();
                 CustomerDTO customerDTO2 = customerMapper.fromCustomer(customer2);
                 customerService.addCustomer(customerDTO2);
