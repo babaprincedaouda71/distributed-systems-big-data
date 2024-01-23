@@ -5,6 +5,7 @@ import {CustomerService} from "../services/customer.service";
 import {CustomerModel} from "../model/customer.model";
 import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
+import {AppStateService} from "../services/app-state.service";
 
 @Component({
   selector: 'app-customer',
@@ -16,11 +17,10 @@ import {RouterLink} from "@angular/router";
   styleUrl: './customer.component.css'
 })
 export class CustomerComponent implements OnInit{
-
-  public customers : Array<CustomerModel> = []
-  public keyword: string = "";
-
-  constructor(private customerService : CustomerService) {
+  customers : Array<CustomerModel> = []
+  keyword : string = ""
+  constructor(private customerService : CustomerService,
+              public customerState : AppStateService) {
   }
   ngOnInit(): void {
     this.getCustomers()
@@ -30,7 +30,7 @@ export class CustomerComponent implements OnInit{
     this.customerService.getCustomers()
       .subscribe({
         next : data => {
-          this.customers = data;
+          this.customerState.customerState.customers = data;
         },
         error : err => {
           alert("Erreur lors du chargement des Clients")

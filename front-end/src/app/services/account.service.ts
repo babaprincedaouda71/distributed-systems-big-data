@@ -12,4 +12,8 @@ export class AccountService {
   public getAccounts() {
     return this.http.get<Array<AccountModel>>("http://localhost:8888/ACCOUNT-SERVICE/account/all")
   }
+
+  public addAccount(account: AccountModel) {
+    return this.http.post<AccountModel>("http://localhost:8888/ACCOUNT-SERVICE/account/add", account)
+  }
 }

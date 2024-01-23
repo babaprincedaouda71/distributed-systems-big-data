@@ -3,14 +3,16 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {CustomerService} from "../services/customer.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CustomerModel} from "../model/customer.model";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-update-customer',
   standalone: true,
-    imports: [
-        FormsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf
+  ],
   templateUrl: './update-customer.component.html',
   styleUrl: './update-customer.component.css'
 })
@@ -33,16 +35,17 @@ export class UpdateCustomerComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getCustomer()
-    this.customerForm = this.formBuilder.group({
-      email : this.formBuilder.control('', [Validators.required]),
-    })
   }
 
   private getCustomer() {
     this.customerService.getCustomer(this.customerId)
       .subscribe({
-        next : data => {
-          this.customer = data
+        next : customer => {
+          this.customerForm = this.formBuilder.group({
+            firstName : this.formBuilder.control(customer.firstName, [Validators.required]),
+            lastName : this.formBuilder.control(customer.lastName, [Validators.required]),
+            email : this.formBuilder.control(customer.email, [Validators.required]),
+          })
         },
         error : err => {
           alert("Error")
@@ -53,11 +56,14 @@ export class UpdateCustomerComponent implements OnInit{
   updateCustomer(customerId : number) {
     this.customer = this.customerForm.value
     console.log(this.customer)
-    this.customer.id = customerId
-    console.log(typeof customerId)
-    this.customer.firstName = "";
-    this.customer.lastName = "";
-    this.customerService.updateCustomer(this.customer, customerId);
-    this.router.navigate(['/customers'])
+    this.customerService.updateCustomer(this.customer, customerId)
+      .subscribe({
+        next : customer => {
+          this.router.navigate(['/customers'])
+        },
+        error : err => {
+          alert("Error during Updating Product")
+        }
+      });
   }
 }

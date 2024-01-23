@@ -7,8 +7,10 @@ import bf.baba.accountservice.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -18,6 +20,9 @@ public class AccountServiceImpl01 implements AccountService {
     @Override
     public AccountDTO createAccount(AccountDTO accountDTO) {
         Account account = accountMapper.fromAccountDTTO(accountDTO);
+        account.setAccountId(UUID.randomUUID().toString());
+        account.setCustomer_id(5L);
+        account.setOpeningDate(LocalDate.now());
         Account savedAccount = accountRepository.save(account);
         return accountMapper.fromAccount(savedAccount);
     }

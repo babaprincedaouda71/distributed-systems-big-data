@@ -2,8 +2,16 @@
   <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="customerForm" >
           <form [formGroup] = "customerForm" (ngSubmit)="updateCustomer(customerId)" >
+            <div class="mb-3">
+              <label class="form-label">First Name</label>
+              <input class="form-control" type="text" formControlName = "firstName">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Last Name</label>
+              <input class="form-control" type="text" formControlName = "lastName">
+            </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
               <input class="form-control" type="email" formControlName = "email">

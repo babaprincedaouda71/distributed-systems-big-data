@@ -63,6 +63,8 @@ public class CustomerServiceImpl01 implements CustomerService {
     public CustomerDTO updateCustomer(Long customerId, CustomerDTO customerDTO) {
         Customer existingCustomer = customerRepository.findById(customerId).get();
         existingCustomer.setEmail(customerDTO.getEmail());
+        existingCustomer.setFirstName(customerDTO.getFirstName());
+        existingCustomer.setLastName(customerDTO.getLastName());
         Customer updatedCustomer = customerRepository.save(existingCustomer);
         System.out.println(existingCustomer);
         return customerMapper.fromCustomer(updatedCustomer);
