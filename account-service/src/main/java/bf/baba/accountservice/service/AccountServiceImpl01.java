@@ -21,7 +21,7 @@ public class AccountServiceImpl01 implements AccountService {
     public AccountDTO createAccount(AccountDTO accountDTO) {
         Account account = accountMapper.fromAccountDTTO(accountDTO);
         account.setAccountId(UUID.randomUUID().toString());
-        account.setCustomer_id(5L);
+        account.setCustomer_id(accountDTO.getCustomer_id());
         account.setOpeningDate(LocalDate.now());
         Account savedAccount = accountRepository.save(account);
         return accountMapper.fromAccount(savedAccount);

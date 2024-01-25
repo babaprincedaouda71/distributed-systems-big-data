@@ -16,4 +16,8 @@ export class AccountService {
   public addAccount(account: AccountModel) {
     return this.http.post<AccountModel>("http://localhost:8888/ACCOUNT-SERVICE/account/add", account)
   }
+
+  searchAccount(keyword: any) {
+    return this.http.get<AccountModel>(`http://localhost:8888/ACCOUNT-SERVICE/account/find/${keyword}`)
+  }
 }
