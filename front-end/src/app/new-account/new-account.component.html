@@ -14,12 +14,15 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Account Type</label>
-              <input class="form-control" type="text" formControlName = "accountType">
+              <select class="form-select" formControlName = "accountType" >
+                <option value="CURRENT_ACCOUNT">CURRENT_ACCOUNT</option>
+                <option value="SAVING_ACCOUNT">SAVING_ACCOUNT</option>
+              </select>
             </div>
 <!--            <div class="mb-3">-->
 <!--              <label class="form-label">Customer</label>-->
 <!--              <select formControlName = "customer" class="form-select">-->
-<!--                <option *ngFor="let customer of customers">-->
+<!--                <option *ngFor="let customer of customers" [value]="customer.id" >-->
 <!--                  {{customer.firstName}} {{customer.lastName}}-->
 <!--                </option>-->
 <!--              </select>-->

@@ -23,6 +23,8 @@ export class NewAccountComponent implements OnInit{
 
   public accountForm! : FormGroup
   public customers : Array<CustomerModel> = []
+  customer_id! : number
+  account! : AccountModel
   constructor(private formBuilder : FormBuilder,
               private router : Router,
               private accountService : AccountService,
@@ -30,6 +32,19 @@ export class NewAccountComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.getCustomers()
+
+    this.accountForm = this.formBuilder.group({
+      balance : this.formBuilder.control(0, [Validators.required]),
+      currency : this.formBuilder.control('', [Validators.required]),
+      // accountType : this.formBuilder.control('', [Validators.required]),
+      accountType : new FormControl('', [Validators.required]),
+      customer : new FormControl('', [Validators.required]),
+    });
+
+  }
+
+  getCustomers(){
     this.customerService.getCustomers()
       .subscribe({
         next : data => {
@@ -39,19 +54,20 @@ export class NewAccountComponent implements OnInit{
           alert("Error During Customer Loading")
         }
       });
-
-    this.accountForm = this.formBuilder.group({
-      balance : this.formBuilder.control(0, [Validators.required]),
-      currency : this.formBuilder.control('', [Validators.required]),
-      accountType : this.formBuilder.control('', [Validators.required]),
-      // customer : new FormControl('', [Validators.required]),
-    });
-
   }
 
   addAccount() {
-    let account = this.accountForm.value
-    this.accountService.addAccount(account)
+    this.account = this.accountForm.value
+    this.customer_id = this.accountForm.get("customer")?.value
+    this.account.customer_id = parseInt(String(this.customer_id));
+    this.account.customer = {
+      id : this.account.customer_id,
+      firstName : this.account.customer.firstName,
+      lastName : this.account.customer.lastName,
+      email : this.account.customer.email
+    }
+    console.log(this.account.customer)
+    this.accountService.addAccount(this.account)
       .subscribe({
         next : data => {
           this.router.navigate(['/accounts'])
@@ -60,6 +76,5 @@ export class NewAccountComponent implements OnInit{
           alert("Error During Account Creation")
         }
       })
-    alert(JSON.stringify(account))
   }
 }
