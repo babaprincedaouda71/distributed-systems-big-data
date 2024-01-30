@@ -36,7 +36,8 @@ export class NewAccountComponent implements OnInit{
 
     this.accountForm = this.formBuilder.group({
       balance : this.formBuilder.control(0, [Validators.required]),
-      currency : this.formBuilder.control('', [Validators.required]),
+      // currency : this.formBuilder.control('', [Validators.required]),
+      currency : new FormControl('', [Validators.required]),
       // accountType : this.formBuilder.control('', [Validators.required]),
       accountType : new FormControl('', [Validators.required]),
       customer : new FormControl('', [Validators.required]),
