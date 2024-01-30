@@ -19,6 +19,7 @@ import {AppStateService} from "../services/app-state.service";
 export class CustomerComponent implements OnInit{
   customers : Array<CustomerModel> = []
   keyword : string = ""
+  customer! : CustomerModel
   constructor(private customerService : CustomerService,
               public customerState : AppStateService) {
   }
@@ -61,5 +62,13 @@ export class CustomerComponent implements OnInit{
           alert("Error During Search")
         }
       })
+  }
+
+  onOpenModal(customer: CustomerModel, modal: string) {
+    const button = document.createElement('button')
+    if (modal === 'delete') {
+      button.setAttribute('data-target', '#deleteModal')
+      this.customer = customer
+    }
   }
 }

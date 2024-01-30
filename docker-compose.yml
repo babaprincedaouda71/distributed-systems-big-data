@@ -9,6 +9,8 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
       interval: 10s
+    networks:
+      - e-bank-network
 
   bank-config-service:
     build: ./config-service
@@ -25,6 +27,8 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9999/actuator/health"]
       interval: 10s
+    networks:
+      - e-bank-network
 
   bank-customer-service:
     build: ./customer-service
@@ -42,6 +46,8 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
       interval: 10s
+    networks:
+      - e-bank-network
 
   bank-account-service:
     build: ./account-service
@@ -59,6 +65,8 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
       interval: 10s
+    networks:
+      - e-bank-network
 
   bank-gateway-service:
     build: ./gateway-service
@@ -73,6 +81,8 @@ services:
     depends_on:
       bank-config-service:
         condition: service_healthy
+    networks:
+      - e-bank-network
 
   front-end:
     build: ./front-end
@@ -81,3 +91,33 @@ services:
       - '80:80'
     expose:
       - '80'
+    networks:
+      - e-bank-network
+
+  mysql-container:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: b@b@prince
+    networks:
+      - e-bank-network
+    ports:
+      - '3309:3306'
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    networks:
+      - e-bank-network
+    ports:
+      - '82:80'
+    depends_on:
+      - mysql-container
+    environment:
+      PMA_HOST: mysql-container
+      PMA_PORT: 3306
+    restart: always
+
+networks:
+  e-bank-network:
+    driver: bridge
