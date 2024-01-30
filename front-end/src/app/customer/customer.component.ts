@@ -40,14 +40,14 @@ export class CustomerComponent implements OnInit{
   }
 
   deleteCustomer(customerId : number) {
-    if (confirm("You're About to Delete a Customer "))
     this.customerService.deleteCustomer(customerId)
       .subscribe({
         next : value => {
-          this.customers = this.customers.filter(customer => customer.id !== customerId )
+          // this.customers = this.customers.filter(customer => customer.id !== customerId )
+          this.getCustomers()
         },
         error : err => {
-          alert("Erreur lors de la suppression !!!!")
+          alert(err.message)
         }
       })
   }
@@ -65,10 +65,17 @@ export class CustomerComponent implements OnInit{
   }
 
   onOpenModal(customer: CustomerModel, modal: string) {
+    const container = document.getElementById('main-container')
     const button = document.createElement('button')
+    button.type = 'button'
+    button.style.display = 'none'
+    button.setAttribute('data-bs-toggle', 'modal')
     if (modal === 'delete') {
-      button.setAttribute('data-target', '#deleteModal')
+      button.setAttribute('data-bs-target', '#deleteModal')
       this.customer = customer
     }
+
+    container?.appendChild(button)
+    button.click()
   }
 }

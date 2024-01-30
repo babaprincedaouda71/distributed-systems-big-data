@@ -1,4 +1,4 @@
-<div class="p-3">
+<div class="p-3" id="main-container">
   <div class="card">
     <div class="card-body">
       <div class="input-group col-auto">
@@ -16,19 +16,19 @@
         </thead>
         <tbody>
           <tr *ngFor="let customer of customers">
-            <td>{{customer.id}}</td>
-            <td>{{customer.firstName}}</td>
-            <td>{{customer.lastName}}</td>
-            <td>{{customer.email}}</td>
+            <td>{{customer?.id}}</td>
+            <td>{{customer?.firstName}}</td>
+            <td>{{customer?.lastName}}</td>
+            <td>{{customer?.email}}</td>
             <td>
-              <button class="btn btn-secondary" [routerLink]="['/updateCustomer', customer.id]" >
+              <button class="btn btn-secondary" [routerLink]="['/updateCustomer', customer?.id]" >
                 <i class="bi bi-pen"></i>
               </button>
             </td>
             <td>
-              <button (click)="onOpenModal(customer, 'delete')" class="btn btn-danger" data-bs-toggle="modal">
+              <a (click)="onOpenModal(customer, 'delete')" class="btn btn-danger tooltips">
                 <i class="bi bi-trash"></i>
-              </button>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -36,22 +36,24 @@
     </div>
   </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-  <div class="modal-dialog">
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">You are about to delete Customer {{customer.firstName}} {{customer.lastName}}</h5>
-        <button (click)="deleteCustomer(customer.id)" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="deleteModelLabel">Delete Customer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-<!--      <div class="modal-body">-->
-<!--        ...-->
-<!--      </div>-->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Yes</button>
+      <div class="modal-body">
+        <p>Are you sure you want to delete customer  <b>{{customer?.firstName}} {{customer?.lastName}}</b></p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="deleteCustomer(customer.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

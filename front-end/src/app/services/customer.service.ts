@@ -14,7 +14,7 @@ export class CustomerService {
   }
 
   deleteCustomer(customerId : number) {
-    return this.http.delete(`http://localhost:8888/CUSTOMER-SERVICE/customer/remove/${customerId}`)
+    return this.http.delete<CustomerModel>(`http://localhost:8888/CUSTOMER-SERVICE/customer/remove/${customerId}`)
   }
 
   addCustomer(customer : CustomerModel) {
