@@ -22,8 +22,7 @@ export class CustomerComponent implements OnInit{
   customer! : CustomerModel
   constructor(private customerService : CustomerService,
               public customerState : AppStateService,
-              private formBuilder : FormBuilder,
-              private router : Router) {
+              private formBuilder : FormBuilder) {
   }
   ngOnInit(): void {
     this.getCustomers()
@@ -78,6 +77,11 @@ export class CustomerComponent implements OnInit{
       this.customer = customer
     }
 
+    if (modal === 'update') {
+      button.setAttribute('data-bs-target', '#updateCustomerModal')
+      this.customer =customer
+    }
+
     container?.appendChild(button)
     button.click()
   }
@@ -95,5 +99,19 @@ export class CustomerComponent implements OnInit{
           alert("Error During Saving Customerss")
         }
       })
+  }
+
+  updateCustomer(updateCustomerForm: NgForm) {
+    document.getElementById('update-customer-form')?.click()
+    this.customer = updateCustomerForm.value
+    this.customerService.updateCustomer(this.customer, this.customer.id)
+      .subscribe({
+        next : customer => {
+          this.getCustomers()
+        },
+        error : err => {
+          alert(err.message)
+        }
+      });
   }
 }

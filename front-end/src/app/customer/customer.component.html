@@ -21,7 +21,7 @@
             <td>{{customer?.lastName}}</td>
             <td>{{customer?.email}}</td>
             <td>
-              <button class="btn btn-secondary" [routerLink]="['/updateCustomer', customer?.id]" >
+              <button (click)="onOpenModal(customer, 'update')" class="btn btn-secondary">
                 <i class="bi bi-pen"></i>
               </button>
             </td>
@@ -57,6 +57,7 @@
 </div>
 
 
+<!-- Add Modal -->
 <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -79,6 +80,37 @@
             <input class="form-control" type="email" ngModel name="email">
           </div>
           <button id="add-customer-form" type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Close</button>
+          <button [disabled]="addCustomerForm.invalid" type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">Update Customer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateCustomerForm = "ngForm" (ngSubmit)="updateCustomer(updateCustomerForm)" >
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input class="form-control" type="hidden" ngModel="{{customer?.id}}" name="id">
+            <input class="form-control" type="text" ngModel="{{customer?.firstName}}" name="firstName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input class="form-control" type="text" ngModel="{{customer?.lastName}}" name="lastName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" type="email" ngModel="{{customer?.email}}" name="email">
+          </div>
+          <button id="update-customer-form" type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Close</button>
           <button [disabled]="addCustomerForm.invalid" type="submit" class="btn btn-primary">Save</button>
         </form>
       </div>
