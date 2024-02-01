@@ -3,15 +3,15 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {CustomerService} from "../services/customer.service";
 import {CustomerModel} from "../model/customer.model";
-import {FormsModule} from "@angular/forms";
-import {RouterLink} from "@angular/router";
+import {FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
+import {Router, RouterLink} from "@angular/router";
 import {AppStateService} from "../services/app-state.service";
 
 @Component({
   selector: 'app-customer',
   standalone: true,
   imports: [
-    NgIf, HttpClientModule, NgForOf, FormsModule, RouterLink
+    NgIf, HttpClientModule, NgForOf, FormsModule, RouterLink, ReactiveFormsModule
   ],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css'
@@ -21,7 +21,9 @@ export class CustomerComponent implements OnInit{
   keyword : string = ""
   customer! : CustomerModel
   constructor(private customerService : CustomerService,
-              public customerState : AppStateService) {
+              public customerState : AppStateService,
+              private formBuilder : FormBuilder,
+              private router : Router) {
   }
   ngOnInit(): void {
     this.getCustomers()
@@ -40,6 +42,7 @@ export class CustomerComponent implements OnInit{
   }
 
   deleteCustomer(customerId : number) {
+    document.getElementById('delete-customer-form')?.click()
     this.customerService.deleteCustomer(customerId)
       .subscribe({
         next : value => {
@@ -77,5 +80,20 @@ export class CustomerComponent implements OnInit{
 
     container?.appendChild(button)
     button.click()
+  }
+
+  addCustomer(addCustomerForm : NgForm) {
+    document.getElementById('add-customer-form')?.click()
+    let customer = addCustomerForm.value
+    this.customerService.addCustomer(customer)
+      .subscribe({
+        next : data => {
+          this.getCustomers()
+          addCustomerForm.reset()
+        },
+        error : err => {
+          alert("Error During Saving Customerss")
+        }
+      })
   }
 }
