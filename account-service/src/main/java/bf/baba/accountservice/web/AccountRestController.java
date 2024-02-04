@@ -2,15 +2,19 @@ package bf.baba.accountservice.web;
 
 import bf.baba.accountservice.clients.CustomerRestClient;
 import bf.baba.accountservice.dto.AccountDTO;
+import bf.baba.accountservice.entity.TransferData;
 import bf.baba.accountservice.model.Customer;
 import bf.baba.accountservice.service.AccountService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Transactional
 @RequestMapping("/account")
 public class AccountRestController {
     private AccountService accountService;
@@ -49,5 +53,11 @@ public class AccountRestController {
     @DeleteMapping("/remove/accounts/{customerId}")
     public void deleteAccountsByCustomerId(@PathVariable Long customerId){
         accountService.deleteAccountsByCustomerId(customerId);
+    }
+
+    @PostMapping("/transfer")
+    public boolean transferAmount(@RequestBody TransferData transferData){
+        accountService.transfer(transferData);
+        return true;
     }
 }

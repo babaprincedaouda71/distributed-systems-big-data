@@ -39,6 +39,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/accounts">All Accounts</a></li>
             <li><a class="dropdown-item" routerLink="/new-account">Add Account</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#transferModal">Transfer</a></li>
             <!--            <li><hr class="dropdown-divider"></li>-->
           </ul>
         </li>
@@ -50,4 +51,8 @@
   </div>
 </nav>
 
-<router-outlet></router-outlet>
+<router-outlet>
+  <div>
+    <h1 class="display-1">Test</h1>
+  </div>
+</router-outlet>

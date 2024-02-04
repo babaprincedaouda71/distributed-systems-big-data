@@ -30,3 +30,41 @@
     </div>
   </div>
 </div>
+
+<!-- Transfer Modal -->
+<div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Transfer Amount</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #transferForm = "ngForm" (ngSubmit)="transfer(transferForm)">
+          <div class="mb-3">
+            <label class="form-label">From</label>
+            <select class="form-control" [ngModel]="fromAccount" name="fromAccount">
+              <option *ngFor="let account of accounts" [value]="account.id">
+                {{account?.customer?.firstName}} {{account?.customer?.lastName}}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">To</label>
+            <select class="form-control" [ngModel]="toAccount" name="toAccount">
+              <option *ngFor="let account of accounts" [value]="account.id">
+                {{account?.customer?.firstName}} {{account?.customer?.lastName}}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input class="form-control" type="number" [(ngModel)]="amount" name="amount" required>
+          </div>
+          <button id="transfer-form" type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Close</button>
+          <button [disabled]="transferForm.invalid" type="submit" class="btn btn-primary">Validate</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
