@@ -44,7 +44,7 @@ public class AccountRestController {
         return accountDTO;
     }
 
-    @DeleteMapping("/remove/{accountId}")
+    @DeleteMapping("/delete/{accountId}")
     public void deleteAccount(@PathVariable String accountId){
         accountService.deleteAccount(accountId);
     }

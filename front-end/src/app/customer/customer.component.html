@@ -1,6 +1,9 @@
-<div class="p-3" id="main-container">
+<div class="container p-3" id="main-container">
   <div class="card">
     <div class="card-body">
+      <div class="mb-3">
+        <button class="btn btn-success p-2 m-2" data-bs-toggle="modal" data-bs-target="#addCustomerModal">New Client</button>
+      </div>
       <div class="input-group col-auto">
         <input [(ngModel)] = "keyword" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button (click)="searchCustomer(keyword)" class="btn btn-outline-success" type="submit">Search</button>
@@ -69,15 +72,15 @@
         <form #addCustomerForm = "ngForm" (ngSubmit)="addCustomer(addCustomerForm)" >
           <div class="mb-3">
             <label class="form-label">First Name</label>
-              <input class="form-control" type="text" ngModel name="firstName">
+              <input class="form-control" type="text" ngModel name="firstName" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Last Name</label>
-            <input class="form-control" type="text" ngModel name="lastName">
+            <input class="form-control" type="text" ngModel name="lastName" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input class="form-control" type="email" ngModel name="email">
+            <input class="form-control" type="email" ngModel name="email" required>
           </div>
           <button id="add-customer-form" type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Close</button>
           <button [disabled]="addCustomerForm.invalid" type="submit" class="btn btn-primary">Save</button>

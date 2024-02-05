@@ -25,4 +25,8 @@ export class AccountService {
   public transfer(transferData : object) {
     return this.http.post(`http://localhost:8888/ACCOUNT-SERVICE/account/transfer`, transferData)
   }
+
+  public deleteAccount(accountId : string) {
+    return this.http.delete(`http://localhost:8888/ACCOUNT-SERVICE/account/delete/${accountId}`)
+  }
 }

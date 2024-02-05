@@ -44,7 +44,7 @@ public class CustomerServiceApplication {
 //            CustomerDTO customerDTO1 = customerMapper.fromCustomer(customer1);
 //            customerService.addCustomer(customerDTO1);
 
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < 5; i++){
                 Customer customer2 = generateRandomCustomer();
                 CustomerDTO customerDTO2 = customerMapper.fromCustomer(customer2);
                 customerService.addCustomer(customerDTO2);
@@ -54,9 +54,9 @@ public class CustomerServiceApplication {
 
     private Customer generateRandomCustomer() {
         Random random = new Random();
-        String[] firstNames = {"John", "Alice", "Bob", "Emma", "David", "Olivia", "James", "Sophia", "Baba", "Boris", "Aziz"};
-        String[] lastNames = {"Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson"};
-        String[] domains = {"gmail.com", "yahoo.com", "hotmail.com", "example.com", "test.com"};
+        String[] firstNames = {"Awa", "Alice", "Brama", "Emma", "Daouda", "Olivia", "Jean", "Safiatou", "Miguel", "Stéphane"};
+        String[] lastNames = {"Ouédraogo", "Kaboré", "Ouattara", "Coulibaly", "Traoré", "Samne", "Millogo", "Malo", "Son", "Hébié"};
+        String[] domains = {"gmail.com", "yahoo.com", "hotmail.com", "icloud.com", "incognito.com"};
 
         String firstName = firstNames[random.nextInt(firstNames.length)];
         String lastName = lastNames[random.nextInt(lastNames.length)];
