@@ -62,7 +62,7 @@ export class AccountComponent implements OnInit{
           this.accounts = this.accounts.filter(account => account.customer !== null)
         },
         error : err => {
-          // this.handleNotification()
+          alert(err.message)
         }
       })
   }
@@ -82,6 +82,7 @@ export class AccountComponent implements OnInit{
   addAccount(addAccountForm : NgForm) {
     document.getElementById('add-account-form')?.click()
     this.account = addAccountForm.value
+    this.account.balance = parseFloat(this.account.balance.toFixed(2))
     this.customer_id = addAccountForm.controls['customer']?.value
     this.account.customer_id = parseInt(String(this.customer_id));
     this.account.customer = {
@@ -100,7 +101,7 @@ export class AccountComponent implements OnInit{
           addAccountForm.reset()
         },
         error : err => {
-          alert("Error During Account Creation")
+          alert(err.message.toString())
         }
       })
   }

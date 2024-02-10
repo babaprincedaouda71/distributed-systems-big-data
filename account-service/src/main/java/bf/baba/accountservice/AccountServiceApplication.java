@@ -35,7 +35,7 @@ public class AccountServiceApplication {
 			customerRestClient.allCustomers().forEach(customer -> {
 				Account account = Account.builder()
 						.accountId(UUID.randomUUID().toString())
-						.balance(Math.random() * 5463)
+						.balance(Double.parseDouble(String.format("%.2f", (Math.random() * 5463))))
 						.currency("MAD")
 						.accountType(AccountType.CURRENT_ACCOUNT)
 						.openingDate(LocalDate.now())
@@ -46,7 +46,7 @@ public class AccountServiceApplication {
 
 				Account account1 = Account.builder()
 						.accountId(UUID.randomUUID().toString())
-						.balance(Math.random() * 5463)
+						.balance(Double.parseDouble(String.format("%.2f", (Math.random() * 5463))))
 						.currency("MAD")
 						.accountType(AccountType.SAVING_ACCOUNT)
 						.openingDate(LocalDate.now())
