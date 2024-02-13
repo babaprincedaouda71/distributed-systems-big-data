@@ -35,7 +35,8 @@ export class CustomerComponent implements OnInit{
           this.customers = data;
         },
         error : err => {
-          alert("Erreur lors du chargement des Clients")
+          alert(err.message())
+          console.log(err.message())
         }
       })
   }

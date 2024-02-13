@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit{
     this.getCustomers();
   }
 
-  onOpenModal(account: AccountModel, modal: string) {
+  onOpenModal(account: AccountModel, customer : CustomerModel, modal: string) {
     const container = document.getElementById('main-container')
     const button = document.createElement('button')
     button.type = 'button'
@@ -43,11 +43,13 @@ export class AccountComponent implements OnInit{
     if (modal === 'delete') {
       button.setAttribute('data-bs-target', '#deleteModal')
       this.account = account
+      this.account.customer = customer
     }
 
     if (modal === 'update') {
       button.setAttribute('data-bs-target', '#updateAccountModal')
       this.account =account
+      this.account.customer = customer
     }
 
     container?.appendChild(button)

@@ -31,7 +31,7 @@
             <td>{{account?.customer?.firstName}} {{account?.customer?.lastName}}</td>
             <td>{{account?.customer?.id}}</td>
             <td>
-              <button (click)="onOpenModal(account, 'delete')" class="btn btn-danger tooltips">
+              <button (click)="onOpenModal(account, account.customer, 'delete')" class="btn btn-danger tooltips">
                 <i class="bi bi-trash"></i>
               </button>
             </td>

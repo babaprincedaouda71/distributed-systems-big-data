@@ -7,6 +7,7 @@ import bf.baba.accountservice.model.Customer;
 import bf.baba.accountservice.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,5 +60,11 @@ public class AccountRestController {
     public boolean transferAmount(@RequestBody TransferData transferData){
         accountService.transfer(transferData);
         return true;
+    }
+
+
+    @GetMapping("/auth")
+    public Authentication authentication(Authentication authentication){
+        return authentication;
     }
 }
